@@ -43,8 +43,12 @@ func Vend(pkgs []string, format string, options ...VendOptions) error {
 
 	// if no packages were provided, we can only assume the current relative
 	// directory contains Go source code, therefore so we should scan it
+	scanOptsVendor := []imports.ScanOptions{}
+	if local {
+		scanOptsVendor = append(scanOptsVendor, imports.ImportLocal)
+	}
 	if len(pkgs) == 0 && !ignore {
-		pkgs, err = imports.Scan(".")
+		pkgs, err = imports.Scan(".", scanOptsVendor...)
 		if err != nil {
 			return err
 		}
