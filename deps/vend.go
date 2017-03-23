@@ -22,7 +22,7 @@ import (
 func Vend(pkgs []string, format string, options ...VendOptions) error {
 
 	// parse VendOptions into usable boolean values
-	update, lock, hold, prune, ignore, verbose, tree, results, strict := parseVendOptions(options)
+	update, lock, hold, prune, ignore, verbose, tree, results, strict, local := parseVendOptions(options)
 
 	// load or create an empty manifest file
 	m, err := manifest.Load(format)
@@ -190,6 +190,9 @@ func Vend(pkgs []string, format string, options ...VendOptions) error {
 			if prune {
 				scanOpts = append(scanOpts, imports.SkipTestFiles)
 			}
+		}
+		if local {
+			scanOpts = append(scanOpts, imports.ImportLocal)
 		}
 		vdeps, err := imports.Scan(filepath.Join("vendor", pkg.path), scanOpts...)
 		if err != nil {

@@ -36,10 +36,13 @@ const (
 
 	// StrictOption returns non-zero status code when a path and/or revision is invalid.
 	StrictOption
+
+	// Import local allows to import local dependencies into vendor folder
+	ImportLocal
 )
 
 // ParseOptions converts cli flag inputs to VendOptions.
-func ParseOptions(update, lock, hold, prune, ignore, verbose, tree, results, strict bool) []VendOptions {
+func ParseOptions(update, lock, hold, prune, ignore, verbose, tree, results, strict, local bool) []VendOptions {
 	options := []VendOptions{}
 	if update {
 		options = append(options, UpdateOption)
@@ -68,10 +71,13 @@ func ParseOptions(update, lock, hold, prune, ignore, verbose, tree, results, str
 	if strict {
 		options = append(options, StrictOption)
 	}
+	if local {
+		options = append(options, ImportLocal)
+	}
 	return options
 }
 
-func parseVendOptions(options []VendOptions) (update, lock, hold, prune, ignore, verbose, tree, results, strict bool) {
+func parseVendOptions(options []VendOptions) (update, lock, hold, prune, ignore, verbose, tree, results, strict, local bool) {
 	for _, option := range options {
 		switch option {
 		case UpdateOption:
@@ -92,7 +98,9 @@ func parseVendOptions(options []VendOptions) (update, lock, hold, prune, ignore,
 			results = true
 		case StrictOption:
 			strict = true
+		case ImportLocal:
+			local = true
 		}
 	}
-	return update, lock, hold, prune, ignore, verbose, tree, results, strict
+	return update, lock, hold, prune, ignore, verbose, tree, results, strict, local
 }

@@ -8,8 +8,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/govend/govend/deps"
-	"github.com/govend/govend/imports"
+	"github.com/talalashraf/govend/deps"
+	"github.com/talalashraf/govend/imports"
 	"github.com/spf13/cobra"
 )
 
@@ -29,6 +29,7 @@ var (
 	scan          bool
 	skipTestFiles bool
 	skipFilters   bool
+	importLocal   bool
 	format        string
 	strict        bool
 )
@@ -79,6 +80,8 @@ const (
 	strictDesc = `The --strict flag returns non-zero status code when a package
 	path and/or revision is invalid.
 	`
+	importLocalDesc = `The -importLocal flag will force to add local dependencies to the vendor directory.
+	`
 )
 
 // govend represents the command root
@@ -101,7 +104,7 @@ var govend = &cobra.Command{
 			}
 
 			// parse flag options relevant to the scan command
-			sOpts := imports.ParseOptions(skipTestFiles, skipFilters)
+			sOpts := imports.ParseOptions(skipTestFiles, skipFilters, importLocal)
 
 			pkgs, err := imports.Scan(path, sOpts...)
 			if err != nil {
@@ -128,7 +131,7 @@ var govend = &cobra.Command{
 			}
 
 			// parse flag options relevant to the vend command
-			vOpts := deps.ParseOptions(update, lock, hold, prune, ignore, verbose, tree, results, strict)
+			vOpts := deps.ParseOptions(update, lock, hold, prune, ignore, verbose, tree, results, strict, importLocal)
 
 			// vendor according to the options provided
 			if err := deps.Vend(args, format, vOpts...); err != nil {
@@ -153,5 +156,6 @@ func main() {
 	govend.Flags().BoolVar(&skipFilters, "skipFilters", false, skipFiltersDesc)
 	govend.Flags().BoolVar(&skipTestFiles, "skipTestFiles", false, skipTestFilesDesc)
 	govend.Flags().BoolVar(&strict, "strict", false, strictDesc)
+	govend.Flags().BoolVarP(&importLocal, "importLocal", "z", false, importLocalDesc)
 	govend.Execute()
 }
