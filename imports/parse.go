@@ -49,13 +49,16 @@ func Parse(file string) ([]string, error) {
 }
 
 // ParseOptions converts cli flag inputs to ScanOptions.
-func ParseOptions(skipTestFiles, skipFilters bool) []ScanOptions {
+func ParseOptions(skipTestFiles, skipFilters bool, importLocal bool) []ScanOptions {
 	options := []ScanOptions{}
 	if skipTestFiles {
 		options = append(options, SkipTestFiles)
 	}
 	if skipFilters {
 		options = append(options, SkipFilters)
+	}
+	if importLocal {
+		options = append(options, ImportLocal)
 	}
 	return options
 }

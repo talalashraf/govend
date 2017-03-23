@@ -25,6 +25,9 @@ const (
 
 	// SkipFilters returns the raw unfiltered list of scanned packages.
 	SkipFilters
+
+	// Import local allows to import local dependencies into vendor folder
+	ImportLocal
 )
 
 // Scan takes a directory and scans it for import dependencies.
@@ -34,7 +37,7 @@ func Scan(path string, options ...ScanOptions) ([]string, error) {
 	path = filters.Godeps([]string{path})[0]
 
 	// parse scan options
-	var singlePackage, skipTestFiles, skipFilters bool
+	var singlePackage, skipTestFiles, skipFilters, importLocal bool
 	for _, option := range options {
 		switch option {
 		case SinglePackage:
@@ -43,6 +46,8 @@ func Scan(path string, options ...ScanOptions) ([]string, error) {
 			skipTestFiles = true
 		case SkipFilters:
 			skipFilters = true
+		case ImportLocal
+			importLocal = true
 		}
 	}
 
@@ -116,7 +121,9 @@ func Scan(path string, options ...ScanOptions) ([]string, error) {
 	if !skipFilters {
 		pkgs = filters.Exceptions(pkgs)
 		pkgs = filters.Standard(pkgs)
-		pkgs = filters.Local(pkgs)
+		if !importLocal {
+			pkgs = filters.Local(pkgs)
+		}
 		pkgs = filters.Godeps(pkgs)
 	}
 	pkgs = filters.Duplicates(pkgs)
