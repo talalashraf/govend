@@ -46,7 +46,7 @@ func Scan(path string, options ...ScanOptions) ([]string, error) {
 			skipTestFiles = true
 		case SkipFilters:
 			skipFilters = true
-		case ImportLocal
+		case ImportLocal:
 			importLocal = true
 		}
 	}
