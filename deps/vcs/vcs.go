@@ -19,7 +19,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/govend/govend/deps/vcs/internal/singleflight"
+	"github.com/talalashraf/govend/deps/vcs/internal/singleflight"
 )
 
 // Verbose enables verbose operation logging.

@@ -12,7 +12,7 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/govend/govend/deps/semver"
+	"github.com/talalashraf/govend/deps/semver"
 )
 
 // Vendorable ensures the current local setup is conducive to vendoring.

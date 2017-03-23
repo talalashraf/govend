@@ -9,7 +9,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/govend/govend/imports/filters"
+	"github.com/talalashraf/govend/imports/filters"
 	"github.com/kr/fs"
 )
 

@@ -7,8 +7,8 @@ package deps
 import (
 	"fmt"
 
-	"github.com/govend/govend/deps/repos"
-	"github.com/govend/govend/manifest"
+	"github.com/talalashraf/govend/deps/repos"
+	"github.com/talalashraf/govend/manifest"
 )
 
 // Hold takes a manifest and downloads all the repos with a hold value of true.

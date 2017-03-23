@@ -5,7 +5,7 @@
 // Package repos provides methods for repositories.
 package repos
 
-import "github.com/govend/govend/deps/vcs"
+import "github.com/talalashraf/govend/deps/vcs"
 
 // Repo RepoRoot
 type Repo struct {

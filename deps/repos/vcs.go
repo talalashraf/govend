@@ -12,7 +12,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/govend/govend/deps/vcs"
+	"github.com/talalashraf/govend/deps/vcs"
 )
 
 // VCS represents a version control system for a repository.

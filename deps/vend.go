@@ -11,10 +11,10 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/govend/govend/deps/repos"
-	"github.com/govend/govend/imports"
-	"github.com/govend/govend/imports/filters"
-	"github.com/govend/govend/manifest"
+	"github.com/talalashraf/govend/deps/repos"
+	"github.com/talalashraf/govend/imports"
+	"github.com/talalashraf/govend/imports/filters"
+	"github.com/talalashraf/govend/manifest"
 )
 
 // Vend is the main function govend uses to vendor external packages.
